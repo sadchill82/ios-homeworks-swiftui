@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct InfoView: View {
-    var posts = ModelData.posts
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         NavigationView {
-            List(posts) { post in
+            List(appState.posts) { post in
                 NavigationLink(destination: InfoDetails(post: post)) {
                     InfoRow(post: post)
                 }
@@ -23,8 +23,7 @@ struct InfoView: View {
     }
 }
 
-struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoView()
-    }
+#Preview {
+    InfoView()
+        .environmentObject(AppState())
 }

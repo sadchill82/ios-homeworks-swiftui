@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var appState: AppState
     @State private var isDarkMode = false
     @State private var fontSize = 14.0
     @State private var selectedTheme = 0
@@ -18,6 +19,29 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
+                Section(header: Text("Статистика")) {
+                    HStack {
+                        Text("Пройдено викторин")
+                        Spacer()
+                        Text("\(appState.completedQuizzes)")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack {
+                        Text("Лучший результат")
+                        Spacer()
+                        Text("\(appState.bestScore) из 5")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack {
+                        Text("Разблокировано статей")
+                        Spacer()
+                        Text("\(appState.posts.count) из \(ModelData.posts.count + 1)")
+                            .foregroundColor(.gray)
+                    }
+                }
+                
                 Section(header: Text("Внешний вид")) {
                     Toggle("Темный режим", isOn: $isDarkMode)
                     
@@ -52,4 +76,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+        .environmentObject(AppState())
 }

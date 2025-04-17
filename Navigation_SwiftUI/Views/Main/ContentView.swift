@@ -18,10 +18,10 @@ struct ContentView: View {
             }
             
             NavigationView {
-                HelloView()
+                QuizView()
             }
             .tabItem {
-                Label("Hello", systemImage: "hand.wave")
+                Label("Викторина", systemImage: "questionmark.circle.fill")
             }
             
             NavigationView {
@@ -37,4 +37,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AppState())
 }
