@@ -8,10 +8,13 @@
 import SwiftUI
 
 @main
-struct Navigation_SwiftUIApp: App {
+struct YourAppName: App {
+    @StateObject private var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appState)
         }
     }
 }
