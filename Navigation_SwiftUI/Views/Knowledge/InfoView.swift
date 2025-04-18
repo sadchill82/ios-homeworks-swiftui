@@ -10,20 +10,21 @@ import SwiftUI
 
 struct InfoView: View {
     @EnvironmentObject var appState: AppState
+    var titleOn: Bool
     
     var body: some View {
-        NavigationView {
-            List(appState.posts) { post in
-                NavigationLink(destination: InfoDetails(post: post)) {
-                    InfoRow(post: post)
-                }
+        List(appState.posts) { post in
+            NavigationLink(destination: InfoDetails(post: post)) {
+                InfoRow(post: post)
             }
-            .navigationTitle("База знаний")
         }
+        .navigationTitle(titleOn ? "База знаний" : "")
     }
 }
 
 #Preview {
-    InfoView()
-        .environmentObject(AppState())
+    NavigationView {
+        InfoView(titleOn: true)
+            .environmentObject(AppState())
+    }
 }

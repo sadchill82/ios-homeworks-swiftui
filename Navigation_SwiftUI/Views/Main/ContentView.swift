@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var appState = AppState()
+    @AppStorage("titleOn") private var titleOn = true
+    
     var body: some View {
         TabView {
             NavigationView {
-                InfoView()
+                InfoView(titleOn: titleOn)
             }
             .tabItem {
                 Label("База знаний", systemImage: "book.fill")
@@ -25,17 +28,17 @@ struct ContentView: View {
             }
             
             NavigationView {
-                SettingsView()
+                SettingsView(titleOn: $titleOn)
             }
             .tabItem {
                 Label("Настройки", systemImage: "gear")
             }
         }
         .accentColor(.blue)
+        .environmentObject(appState)
     }
 }
 
 #Preview {
     ContentView()
-        .environmentObject(AppState())
 }
